@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Profile Page</title>
+   <!--  <link rel="stylesheet" href="../views/studentHome.css">-->
+</head>
+<body>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+        }
+
+        .container {
+            flex: 1; /* Make the container take up available space */
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            width: 35%;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .profile-pic img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .student-name {
+            margin-top: 15px;
+            font-size: 24px;
+            color: #333;
+        }
+
+        .input-form {
+            margin-top: 20px;
+        }
+
+        .input-form input {
+            width: 70%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        .input-form .submit-btn {
+            padding: 10px 20px;
+            margin-left: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .input-form .submit-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Right Side Section */
+        .right-section {
+            width: 60%;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Dropdown Menu */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropbtn {
+            background-color: black;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Dashboard Section */
+        .dashboard {
+            margin-top: 30px;
+            background-color: #f0f0f0;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .dashboard ul {
+            list-style-type: none;
+        }
+
+        .dashboard ul li {
+            padding: 5px 0;
+            color: #333;
+        }
+
+        /* Footer Section */
+        footer {
+            background-color: black;
+            color: white;
+            padding: 20px 0;
+            margin-top: 30px;
+        }
+
+        footer .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        footer .footer-container img {
+            height: 60px;
+        }
+
+        footer .footer-container .footer-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        footer .footer-container .footer-links a {
+            color: white;
+            text-decoration: none;
+        }
+
+        footer .footer-container .footer-links a:hover {
+            text-decoration: underline;
+        }
+
+        footer .footer-container .logout-btn {
+            background-color: red;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        footer .footer-container .logout-btn:hover {
+            background-color: darkred;
+        }
+    </style>
+
+    <div class="container">
+        <!-- Student Profile Section -->
+        <div class="profile-section">
+            <div class="profile-pic">
+                <img src="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o=" alt="Profile Picture">
+            </div>
+            <h2 class="student-name" id="studentName"><%=userSignedIn.firstName%> <%=userSignedIn.secondName%></h2>
+
+            <!-- Input Form for Attendance Code -->
+            <div class="input-form">
+                <input type="text" placeholder="Enter Attendance Code..." id="attendanceCodeInput">
+                <button class="submit-btn" onclick="submitAttendanceCode()">Submit</button>
+            </div>
+        </div>
+
+        <!-- Right-Side Section -->
+        <div class="right-section">
+            <h3>Courses</h3>
+            <div class="dropdown">
+                <button class="dropbtn">Computer Science Programs</button>
+                <div class="dropdown-content">
+                    <a href="#">Data Structures</a>
+                    <a href="#">Algorithms</a>
+                    <a href="#">Operating Systems</a>
+                    <a href="#">Database Systems</a>
+                    <a href="#">Software Engineering</a>
+                    <a href="#">Computer Networks</a>
+                    <a href="#">Artificial Intelligence</a>
+                    <a href="#">Cyber Security</a>
+                    <a href="#">Machine Learning</a>
+                    <a href="#">Web Development</a>
+                </div>
+            </div>
+
+            <!-- User Dashboard -->
+            <h3>User Dashboard</h3>
+            <div class="dashboard">
+                <p><strong>Accessed Courses:</strong></p>
+                <ul id="accessedCourses">
+                    <li>Data Structures</li>
+                    <li>Algorithms</li>
+                </ul>
+
+                <p><strong>Missed Courses:</strong></p>
+                <ul id="missedCourses">
+                    <li>Web Development</li>
+                    <li>Cyber Security</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="footer-container">
+            <!-- Left Side: Logo -->
+            <div>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3ie02GpvnGBivfrRie84ZKKVl451-ah6r2w&s" alt="Logo">
+            </div>
+
+            <!-- Center: Links -->
+            <div class="footer-links">
+                <a href="#">Home</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+                <a href="#">History</a>
+            </div>
+
+            <!-- Right Side: Logout Button -->
+            <div>
+                <button class="logout-btn">Logout</button>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+
+
+     <script>
+    
+    </script> 
+
+    
+</body>
+</html>
+

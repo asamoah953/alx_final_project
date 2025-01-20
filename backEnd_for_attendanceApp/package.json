@@ -1,0 +1,19 @@
+{
+  "name": "backend_for_attendanceapp",
+  "version": "1.0.0",
+  "description": "this is Asamoah Clinton's final years project in alx",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "asamoahclinton953"
+  },
+  "author": "Asamoah Clinton",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "nodemon": "^3.1.9"
+  }
+}

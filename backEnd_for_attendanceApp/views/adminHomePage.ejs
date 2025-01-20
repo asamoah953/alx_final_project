@@ -1,0 +1,541 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Attendance Code</title>
+    <!-- <link rel="stylesheet" href="/views/adminHomePage.css"> 
+    <style>
+        /* Global reset and styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, html {
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            color: #333;
+        }
+        .container {
+            display: flex;
+            flex: 1;
+        }
+        
+        /* Left section - Student list */
+        .left-section {
+            width: 25%;
+            min-width: 250px;
+            background-color: #f0f4f8;
+            padding: 20px;
+            border-right: 1px solid #ccc;
+            overflow-y: auto;
+        }
+        .left-section h2 {
+            margin-bottom: 20px;
+        }
+        .student-list {
+            list-style: none;
+        }
+        .student-list li {
+            background-color: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Right section - Admin form and dashboard */
+        .right-section {
+            flex: 1;
+            padding: 20px;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .admin-container, .dashboard-section {
+            margin-bottom: 20px;
+        }
+        .admin-container {
+            text-align: center;
+        }
+        h1, h2, h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .admin-container img.avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        /* Toggle button */
+        .toggle-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            width: 100%;
+        }
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            margin: 0 auto;
+        }
+        .footer-container img {
+            height: 50px;
+        }
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+        .footer-links a {
+            color: #ffcc00;
+            text-decoration: none;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        .logout-btn {
+            background-color: red;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .logout-btn:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
+    <h3 id="totalStudent"></h3>
+    <div class="container">
+        <!-- Left Section 
+        <div class="left-section">
+            <h2>students List</h2>
+            <ol id="studentsId">
+            </ol>
+            
+        </div>
+
+        <!-- Right Section 
+        <div class="right-section" id="rightSection">
+            <button class="toggle-button" id="toggleButton" onclick="toggleRightSection()">Minimize</button>
+
+            <div class="admin-container">
+                <h1>Lecture- Assessment Page</h1>
+                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAJQAlAMBIgACEQEDEQH/xAAaAAEBAAMBAQAAAAAAAAAAAAAAAwECBAUH/8QAKhABAAIBAQcDAwUAAAAAAAAAAAECAxEEEiExQVFxMmGRFCKBQlKSofH/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/APuIAAAAAAAAAAAAAAAAAAAAAAAAAA1teI905yT4BYQ3p7yxrPeQdAjF7R1bRk7goMROvKWQAAAAAAAAAAEr314RyMlteEcmgAAAAAAMxMxyVpbe8okTpyB0DWtt6NWwAAAAAADW86R5bI5Z+7wDUABre8UrrLZxbRfeyTHSOAM32i9p4aVhrGbLH65nymKjrw7RvzFbxET3Xea7sFt/FE9Y4SiqAA2pbS3ss51qTrWAbAAAAAAIW9UroTzkGAAHn39dvMvQcOeu7lntPGATAVB17J6J8uR27NXdxRrznigqAKK4vT+UlMXKQUAAAAAARvGlpWTyx1BMABplxxkrpPPpLN71pGtp0hG21R+mvyCN8OSk+nWO8NYraZ0is/C31Vv2R8n1Vp50j5BnDs8xMWyR+HS5fqrdaR8q489L8J+2fcFQAFccaVSjjMQvEaRAMgAAAAAMTGsaSyAhMaTo1taK1m08oXvXej3cW2axSK95BzZLzktvW/xqCoAAAA6tmyzb7LTrPR0PPxzu3rPaXpUpveEVtjr1+FCAAAAAAAAABLPhrmrpbnHKY6KgPLy7NkxzPDWveEXtJXwYr+qka9weUPQnYsczwm8MfQ4/3X/pUcDatLXnStZmfZ6FdkxV6TbzK9a1rGlaxEe0IrjwbFytm/jDt0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH//2Q==" alt="User Avatar" class="avatar">
+                <h3><%=specificUser.firstName %> <%=specificUser.secondName %>(<%=specificUser.
+                    Staff_Id %>)</h3>
+                <form id="codeForm">
+                    <label for="course">Select Course:</label>
+                    <select id="course" name="course" required>
+                        <option value="">--Choose a Course--</option>
+                        <option value="CS101">CS101 - Introduction to Programming</option>
+                        <option value="CS102">CS102 - Data Structures</option>
+                        <option value="CS103">CS103 - Algorithms</option>
+                        <option value="CS104">CS104 - Operating Systems</option>
+                    </select>
+
+                    <label for="attendanceCode">Set Attendance Code:</label>
+                    <input type="text" id="attendanceCode" name="attendanceCode" placeholder="Enter code" required>
+
+                    <button type="submit">Assign Code</button>
+                </form>
+            </div>
+
+            <div class="dashboard-section">
+                <h2>Admin Dashboard</h2>
+                <h3>Students who entered the code correctly:</h3>
+                <ul id="correctCodeStudents" class="student-list">
+                    <!-- Dynamically populated student list 
+                </ul>
+                <p><strong>Total Student</strong> <span id="correctCodeCount"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3ie02GpvnGBivfrRie84ZKKVl451-ah6r2w&s" alt="Institution Logo">
+            <div class="footer-links">
+                <a href="#">About Us</a>
+                <a href="#">Contact</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <button class="logout-btn">Logout</button>
+        </div>
+    </footer>
+
+    <script >
+
+
+
+document.addEventListener('DOMContentLoaded', async function () {
+    const api = 'http://localhost:8000/users/students';
+
+    try {
+        const response = await fetch(api);
+        if (!response.ok) {
+            throw new Error(`Fetching data error: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        console.log(data)
+        if (data && typeof data.count === 'number') {
+            document.getElementById('totalStudent').innerText = `Total Students: ${data.count}`;
+        }
+        
+        if (data && data.data && Array.isArray(data.data.allStudent)) {
+            createStudentList(data.data.allStudent); // Pass the array of students
+        } else if (data && data.data && typeof data.data.allStudent === 'object') {
+            createStudentList([data.data.allStudent]); // Wrap the single object in an array
+        } else {
+            displayError('Invalid data received from server');
+        }
+    } catch (error) {
+        console.error('Error fetching students:', error);
+        displayError('Error loading student list.');
+    }
+
+    function createStudentList(students) {
+        // Section to display student's list on the homepage
+        const allStudents = document.getElementById('studentsId');
+        allStudents.innerHTML = ''; // Clear existing data
+        
+        // Iterate through the list of students and display them
+        students.forEach(student => {
+            const li = document.createElement('li'); // Create a list item
+            li.textContent =`${student.firstName || 'No First Name'} ${student.secondName || 'No Second Name'}`; // Student name
+            allStudents.appendChild(li); // Append the list item
+        });
+    }
+
+    function displayError(message) {
+        const allStudents = document.getElementById('studentsId');
+        allStudents.innerHTML = `<p>${message}</p>`; // Display error message
+    }
+
+
+
+    
+});
+
+
+    </script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Attendance Code</title>
+    <style>
+        /* Global reset and styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, html {
+            height: 100%;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            color: #333;
+        }
+        .container {
+            display: flex;
+            flex: 1;
+        }
+        
+        /* Left section - Student list */
+        .left-section {
+            width: 25%;
+            min-width: 250px;
+            background-color: #f0f4f8;
+            padding: 20px;
+            border-right: 1px solid #ccc;
+            display: flex;
+            flex-direction: column;
+        }
+        .left-section h2 {
+            margin-bottom: 20px;
+        }
+        .student-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-grow: 1; /* Ensures the list occupies available space */
+            overflow-y: auto; /* Makes the list scrollable */
+            max-height: calc(100vh - 150px); /* Adjusts height to prevent stretching */
+        }
+        .student-list li {
+            background-color: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .student-list li span {
+            color: green;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        /* Right section - Admin form and dashboard */
+        .right-section {
+            flex: 1;
+            padding: 20px;
+            background-color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .admin-container, .dashboard-section {
+            margin-bottom: 20px;
+        }
+        .admin-container {
+            text-align: center;
+        }
+        h1, h2, h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .admin-container img.avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        
+        /* Toggle button */
+        .toggle-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        /* Footer styling */
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+            width: 100%;
+        }
+        .footer-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 90%;
+            margin: 0 auto;
+        }
+        .footer-container img {
+            height: 50px;
+        }
+        .footer-links {
+            display: flex;
+            gap: 20px;
+        }
+        .footer-links a {
+            color: #ffcc00;
+            text-decoration: none;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        .logout-btn {
+            background-color: red;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .logout-btn:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
+    <h3 id="totalStudent"></h3>
+    <div class="container">
+        <!-- Left Section -->
+        <div class="left-section">
+            <h2>Students List</h2>
+            <ol id="studentsId" class="student-list">
+                <!-- Dynamically populated student list -->
+            </ol>
+        </div>
+
+        <!-- Right Section -->
+        <div class="right-section" id="rightSection">
+            <button class="toggle-button" id="toggleButton" onclick="toggleRightSection()">Minimize</button>
+
+            <div class="admin-container">
+                <h1>Lecture- Assessment Page</h1>
+                <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDQwNGg8PGjclHyU3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N//AABEIAJQAlAMBIgACEQEDEQH/xAAaAAEBAAMBAQAAAAAAAAAAAAAAAwECBAUH/8QAKhABAAIBAQcDAwUAAAAAAAAAAAECAxEEEiExQVFxMmGRFCKBQlKSofH/xAAVAQEBAAAAAAAAAAAAAAAAAAAAAf/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/APuIAAAAAAAAAAAAAAAAAAAAAAAAAA1teI905yT4BYQ3p7yxrPeQdAjF7R1bRk7goMROvKWQAAAAAAAAAAEr314RyMlteEcmgAAAAAAMxMxyVpbe8okTpyB0DWtt6NWwAAAAAADW86R5bI5Z+7wDUABre8UrrLZxbRfeyTHSOAM32i9p4aVhrGbLH65nymKjrw7RvzFbxET3Xea7sFt/FE9Y4SiqAA2pbS3ss51qTrWAbAAAAAAIW9UroTzkGAAHn39dvMvQcOeu7lntPGATAVB17J6J8uR27NXdxRrznigqAKK4vT+UlMXKQUAAAAAARvGlpWTyx1BMABplxxkrpPPpLN71pGtp0hG21R+mvyCN8OSk+nWO8NYraZ0is/C31Vv2R8n1Vp50j5BnDs8xMWyR+HS5fqrdaR8q489L8J+2fcFQAFccaVSjjMQvEaRAMgAAAAAMTGsaSyAhMaTo1taK1m08oXvXej3cW2axSK95BzZLzktvW/xqCoAAAA6tmyzb7LTrPR0PPxzu3rPaXpUpveEVtjr1+FCAAAAAAAAABLPhrmrpbnHKY6KgPLy7NkxzPDWveEXtJXwYr+qka9weUPQnYsczwm8MfQ4/3X/pUcDatLXnStZmfZ6FdkxV6TbzK9a1rGlaxEe0IrjwbFytm/jDt0AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH//2Q==" alt="User Avatar" class="avatar">
+                <h3><%=specificUser.firstName %> <%=specificUser.secondName %>(<%=specificUser.Staff_Id %>)</h3>
+                <form id="codeForm">
+                    <label for="course">Select Course:</label>
+                    <select id="course" name="course" required>
+                        <option value="">--Choose a Course--</option>
+                        <option value="CS101">CS101 - Introduction to Programming</option>
+                        <option value="CS102">CS102 - Data Structures</option>
+                        <option value="CS103">CS103 - Algorithms</option>
+                        <option value="CS104">CS104 - Operating Systems</option>
+                    </select>
+
+                    <label for="attendanceCode">Set Attendance Code:</label>
+                    <input type="text" id="attendanceCode" name="attendanceCode" placeholder="Enter code" required>
+
+                    <button type="submit">Assign Code</button>
+                </form>
+            </div>
+
+            <div class="dashboard-section">
+                <h2>Admin Dashboard</h2>
+                <h3>Students who entered the code correctly:</h3>
+                <ul id="correctCodeStudents" class="student-list">
+                    <!-- Dynamically populated student list -->
+                </ul>
+                <p><strong>Total Students:</strong> <span id="correctCodeCount"></span></p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3ie02GpvnGBivfrRie84ZKKVl451-ah6r2w&s" alt="Institution Logo">
+            <div class="footer-links">
+                <a href="#">About Us</a>
+                <a href="#">Contact</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <button class="logout-btn">Logout</button>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+            const api = 'http://localhost:8000/users/students';
+
+            try {
+                const response = await fetch(api);
+                if (!response.ok) {
+                    throw new Error(`Fetching data error: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                if (data && typeof data.count === 'number') {
+                    document.getElementById('totalStudent').innerText = `Total Students: ${data.count}`;
+                }
+                if (data && data.data && Array.isArray(data.data.allStudent)) {
+                    createStudentList(data.data.allStudent);
+                } else {
+                    displayError('Invalid data received from server');
+                }
+            } catch (error) {
+                console.error('Error fetching students:', error);
+                displayError('Error loading student list.');
+            }
+
+            function createStudentList(students) {
+                const allStudents = document.getElementById('studentsId');
+                allStudents.innerHTML = '';
+                students.forEach(student => {
+                    const li = document.createElement('li');
+                    li.innerHTML = `${student.firstName || 'No First Name'} ${student.secondName || 'No Second Name'} <span>&#10003;</span>`;
+                    allStudents.appendChild(li);
+                });
+            }
+
+            function displayError(message) {
+                const allStudents = document.getElementById('studentsId');
+                allStudents.innerHTML = `<p>${message}</p>`;
+            }
+        });
+    </script>
+</body>
+</html>
+
