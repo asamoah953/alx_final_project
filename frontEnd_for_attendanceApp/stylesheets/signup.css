@@ -1,0 +1,123 @@
+Basic reset
+body, h1, form, input, button, select, i {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Container styling */
+.container {
+    max-width: 500px;
+    width: 100%;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form styling */
+.signup-form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Form header */
+.signup-form h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Form group styling */
+.form-group {
+    margin-bottom: 15px;
+    position: relative;
+}
+
+/* Label styling */
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Input and select styling */
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Contact group styling */
+.contact-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-container {
+    display: flex;
+    align-items: center;
+}
+
+.contact-container select {
+    width: 30%;
+    margin-right: 10px;
+}
+
+.contact-container input {
+    flex: 1;
+}
+
+/* Password group styling */
+.password-group {
+    position: relative;
+}
+
+.password-container {
+    position: relative;
+}
+
+.password-container input {
+    width: 100%;
+    padding-right: 40px; /* Make space for the eye icon */
+}
+
+.password-container i {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+/* Button styling */
+.btn {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Button hover effect */
+.btn:hover {
+    background-color: #0056b3;
+}
+
+
+
+

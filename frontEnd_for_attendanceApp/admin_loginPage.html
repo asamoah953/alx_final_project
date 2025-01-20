@@ -1,0 +1,40 @@
+<!Doctype html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>LogInPage</title>
+    <meta name="description" content="Attendance app is for taking attendance for student">
+    <link rel="stylesheet" href="./stylesheets/adminLoginPage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+
+
+    <body>
+
+        <div class="form-container">
+            <h3>Lecture LoginPage</h3>
+
+            <form class="form-group" id="loginForm">
+                <div class="form-group input-group">
+                    <input id="text-group" placeholder="email or password" required>
+                </div>
+                <div class="input-group password-group">
+                    <div>
+                    <input type="password" id="password-group" placeholder="password" required>
+                    <i class="fas fa-eye" onclick="togglePassword() " id="togglePassword"></i>
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" class="btn">Login</button>
+                </div>
+                <h4 id="errorMessage"></h4>
+
+            </form>
+        </div>
+    </body>
+
+    <script src="./scripts/adminLoginScript.js"></script>
+
+</html>
